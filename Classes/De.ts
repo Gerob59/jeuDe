@@ -1,10 +1,8 @@
 export default class De {
   private _max: number;
-  private _valeur;
 
   public constructor(valeurMaxDe: number) {
     this._max = valeurMaxDe;
-    this._valeur = 0;
   }
 
   /**
@@ -12,7 +10,6 @@ export default class De {
    * @returns un nombre random entre 1 et la valeur _max du dé
    */
   public lancer(): number {
-    this._valeur = Math.floor(Math.random() * this._max);
-    return this._valeur;
+    return Math.floor(Math.random() * this._max);
   }
 }
