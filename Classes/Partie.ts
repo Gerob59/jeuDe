@@ -97,6 +97,20 @@ export default class Partie {
   }
 
   /**
+   * Permettre de gerer si la partie est fini ou on doit départager des joueurs
+   * @param vainqueur joueur ou liste de joueur ayant le meme nombre de manche gagné
+   */
+  private fin(vainqueur: Joueur[]): void {
+    if (vainqueur.length === 1) {
+      console.log(`Le vainqueur est ${vainqueur[0].nom}`);
+    } else {
+      this._nbToursRestant++;
+      this._joueurs = vainqueur;
+      this.lancerPartie();
+    }
+  }
+
+  /**
    * Affiche le gagnant de la partie
    */
   public afficherGagnant(): void {
@@ -110,12 +124,6 @@ export default class Partie {
         vainqueur.push(joueur);
       }
     });
-    if (vainqueur.length === 1) {
-      console.log(`Le vainqueur est ${vainqueur[0].nom}`);
-    } else {
-      this._nbToursRestant++;
-      this._joueurs = vainqueur;
-      this.lancerPartie();
-    }
+    this.fin(vainqueur);
   }
 }
