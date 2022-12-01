@@ -96,7 +96,7 @@ export default class Partie {
     while (this._nbToursRestant > 0) {
       let plusGrandGobelet: number = 0;
       this.joueurs.forEach((joueur) => {
-        let resultatJoueur: number = joueur.jouer(this.gobelet);
+        let resultatJoueur: number = joueur.jouer(this._gobelet);
         if (this.plusgrand(resultatJoueur, plusGrandGobelet)) {
           plusGrandGobelet = resultatJoueur;
         }
