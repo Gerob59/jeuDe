@@ -18,10 +18,6 @@ export default class Joueur {
     return this._nom;
   }
 
-  get scoreDeLaManche(): number {
-    return this._scoreDeLaManche;
-  }
-
   /**
    * Permet d'incrémenter le nombre de manche gagné du joueur
    */

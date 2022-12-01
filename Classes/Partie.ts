@@ -16,10 +16,6 @@ export default class Partie {
     this._maxDe = maxDe || 6;
   }
 
-  public get nbToursRestant(): number {
-    return this._nbToursRestant;
-  }
-
   public get joueurs(): Joueur[] {
     return this._joueurs;
   }
@@ -73,7 +69,7 @@ export default class Partie {
    */
   private aGagnerLaManche(valeurPlusGrandGobelet: number) {
     this._joueurs.forEach((joueur) => {
-      if (joueur.scoreDeLaManche === valeurPlusGrandGobelet) {
+      if (joueur.afficherScore() === valeurPlusGrandGobelet) {
         joueur.gagneLaManche();
       }
     });
@@ -117,10 +113,10 @@ export default class Partie {
     let plusMancheGagne: number = this._joueurs[0].nbMancheGagne;
     let vainqueur: Joueur[] = [this._joueurs[0]];
     this.joueurs.forEach((joueur) => {
-      if (joueur.scoreDeLaManche > plusMancheGagne) {
-        plusMancheGagne = joueur.scoreDeLaManche;
+      if (joueur.afficherScore() > plusMancheGagne) {
+        plusMancheGagne = joueur.afficherScore();
         vainqueur = [joueur];
-      } else if (joueur.scoreDeLaManche === plusMancheGagne) {
+      } else if (joueur.afficherScore() === plusMancheGagne) {
         vainqueur.push(joueur);
       }
     });
