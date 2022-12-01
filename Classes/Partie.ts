@@ -33,15 +33,6 @@ export default class Partie {
   }
 
   /**
-   * Permet d'avoir un nombre pair de joueur avec un nombre impair de tour. Et inversement.
-   */
-  private nbTourCorrect(): void {
-    if (this.joueurs.length % 2 === this.nbToursRestant % 2) {
-      this._nbToursRestant++;
-    }
-  }
-
-  /**
    * initialise le joueur et lui met un dé dans le gobelet
    * @param nomJoueur
    */
@@ -60,7 +51,6 @@ export default class Partie {
     nomJoueurs.forEach((nom) => {
       this.initialiserJoueur(nom);
     });
-    this.nbTourCorrect();
   }
 
   /**
@@ -111,5 +101,21 @@ export default class Partie {
    */
   public afficherGagnant(): void {
     let plusMancheGagne: number = this._joueurs[0].nbMancheGagne;
+    let vainqueur: Joueur[] = [this._joueurs[0]];
+    this.joueurs.forEach((joueur) => {
+      if (joueur.scoreDeLaManche > plusMancheGagne) {
+        plusMancheGagne = joueur.scoreDeLaManche;
+        vainqueur = [joueur];
+      } else if (joueur.scoreDeLaManche === plusMancheGagne) {
+        vainqueur.push(joueur);
+      }
+    });
+    if (vainqueur.length === 1) {
+      console.log(`Le vainqueur est ${vainqueur[0].nom}`);
+    } else {
+      this._nbToursRestant++;
+      this._joueurs = vainqueur;
+      this.lancerPartie();
+    }
   }
 }
