@@ -2,16 +2,16 @@ import Gobelet from "./Gobelet";
 export default class Joueur {
   private _nom: string;
   private _scoreDeLaManche: number;
-  private _nbMancheGagne: number;
+  private _nbMancheGagner: number;
 
   constructor(nom: string) {
     this._nom = nom;
     this._scoreDeLaManche = 0;
-    this._nbMancheGagne = 0;
+    this._nbMancheGagner = 0;
   }
 
-  get nbMancheGagne(): number {
-    return this._nbMancheGagne;
+  get nbMancheGagner(): number {
+    return this._nbMancheGagner;
   }
 
   get nom(): string {
@@ -22,7 +22,7 @@ export default class Joueur {
    * Permet d'incrémenter le nombre de manche gagné du joueur
    */
   public gagneLaManche() {
-    this._nbMancheGagne++;
+    this._nbMancheGagner++;
   }
 
   /**

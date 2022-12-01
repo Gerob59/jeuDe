@@ -16,15 +16,19 @@ export default class Partie {
     this._maxDe = maxDe || 6;
   }
 
+  public get nbToursRestant(): number {
+    return this._nbToursRestant;
+  }
+
   public get joueurs(): Joueur[] {
     return this._joueurs;
   }
 
-  public gobelet(): Gobelet {
+  public get gobelet(): Gobelet {
     return this._gobelet;
   }
 
-  public maxDe(): number {
+  public get maxDe(): number {
     return this._maxDe;
   }
 
@@ -34,9 +38,9 @@ export default class Partie {
    */
   private initialiserJoueur(nomJoueur: string): void {
     const joueur: Joueur = new Joueur(nomJoueur);
-    this._joueurs.push(joueur);
-    const de: De = new De(this._maxDe);
-    this._gobelet.ajouterDe(de);
+    this.joueurs.push(joueur);
+    const de: De = new De(this.maxDe);
+    this.gobelet.ajouterDe(de);
   }
 
   /**
@@ -55,7 +59,7 @@ export default class Partie {
    * @param plusGrandGobelet La somme la plus grande actuel lancé cette manche par un joueur.
    * @returns true si plus grand, sinon false.
    */
-  private plusgrand(resultatJoueur: number, plusGrandGobelet: number): boolean {
+  private plusGrand(resultatJoueur: number, plusGrandGobelet: number): boolean {
     if (resultatJoueur > plusGrandGobelet) {
       return true;
     } else {
@@ -68,7 +72,7 @@ export default class Partie {
    * @param valeurPlusGrandGobelet
    */
   private aGagnerLaManche(valeurPlusGrandGobelet: number) {
-    this._joueurs.forEach((joueur) => {
+    this.joueurs.forEach((joueur) => {
       if (joueur.afficherScore() === valeurPlusGrandGobelet) {
         joueur.gagneLaManche();
       }
@@ -79,11 +83,11 @@ export default class Partie {
    * Permet de démarrer la partie et le fait tourner jusqu'au sa fin.
    */
   public lancerPartie(): void {
-    while (this._nbToursRestant > 0) {
+    while (this.nbToursRestant > 0) {
       let plusGrandGobelet: number = 0;
       this.joueurs.forEach((joueur) => {
-        let resultatJoueur: number = joueur.jouer(this._gobelet);
-        if (this.plusgrand(resultatJoueur, plusGrandGobelet)) {
+        let resultatJoueur: number = joueur.jouer(this.gobelet);
+        if (this.plusGrand(resultatJoueur, plusGrandGobelet)) {
           plusGrandGobelet = resultatJoueur;
         }
       });
@@ -110,13 +114,13 @@ export default class Partie {
    * Affiche le gagnant de la partie
    */
   public afficherGagnant(): void {
-    let plusMancheGagne: number = this._joueurs[0].nbMancheGagne;
-    let vainqueur: Joueur[] = [this._joueurs[0]];
+    let plusDeMancheGagner: number = this.joueurs[0].nbMancheGagner;
+    let vainqueur: Joueur[] = [this.joueurs[0]];
     this.joueurs.forEach((joueur) => {
-      if (joueur.afficherScore() > plusMancheGagne) {
-        plusMancheGagne = joueur.afficherScore();
+      if (joueur.afficherScore() > plusDeMancheGagner) {
+        plusDeMancheGagner = joueur.afficherScore();
         vainqueur = [joueur];
-      } else if (joueur.afficherScore() === plusMancheGagne) {
+      } else if (joueur.afficherScore() === plusDeMancheGagner) {
         vainqueur.push(joueur);
       }
     });
