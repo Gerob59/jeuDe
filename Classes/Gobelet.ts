@@ -1,10 +1,6 @@
 import De from "./De";
 export default class Gobelet {
-  private _des: De[];
-
-  constructor() {
-    this._des = [];
-  }
+  private _des: De[] = [];
 
   /**
    * Lance tous les dés du gobelet
