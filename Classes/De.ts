@@ -5,11 +5,15 @@ export default class De {
     this._max = valeurMaxDe;
   }
 
+  public get max(): number {
+    return this._max;
+  }
+
   /**
    * Lance un dé de valeur _max : '_max' créé a l'instanciation du dé
    * @returns un nombre random entre 1 et la valeur _max du dé
    */
   public lancer(): number {
-    return Math.floor(Math.random() * this._max);
+    return Math.floor(Math.random() * this.max);
   }
 }
